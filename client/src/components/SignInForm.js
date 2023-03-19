@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SignInForm extends React.Component {
     constructor(props){
@@ -38,7 +39,8 @@ class SignInForm extends React.Component {
                     onChange={this.onChange} value={this.state.body.password}/>                      
 
                 <input type="submit" value="Войти" /> 
-                <p className='signPlaceholder'>Еще нет аккаунта?<br></br>Зарегистрироваться.</p>
+                <p className='signPlaceholder'>Еще нет аккаунта?</p>
+                <Link className='sign-placeholder-link' to="/signUp">Зарегистрироваться.</Link>
           </div>
       </form>
       );

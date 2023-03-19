@@ -5,12 +5,12 @@ class Header extends React.Component {
   
     render() {
       return (
-        <div>
-          <header>Трекер финансов</header>
-          <Link to="/">Дневник трат</Link>
-          <Link to="/signUp">Регистрация</Link>
-          <Link to="/signIn">Авторизация</Link>
-        </div>
+          <header>
+          {/* Трекер финансов */}
+            <Link className="header-link" to="/">Дневник трат</Link>
+            <Link className="header-link" to="/signUp">Регистрация</Link>
+            <Link className="header-link" to="/signIn">Авторизация</Link>
+          </header>
       );
     }
 }
