@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import SignUpForm from './components/SignUpForm';
-import SignInForm from './components/SignInForm';
-import HomePage from './components/HomePage';
+
+import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
+import SignInPage from './pages/SingInPage';
 
 function App() {
 
@@ -11,8 +12,8 @@ function App() {
     <div className='App'>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signIn" element={<SignInForm />} />
-        <Route path="/signUp" element={<SignUpForm />} />
+        <Route path="/signIn" element={<SignInPage />} />
+        <Route path="/signUp" element={<SignUpPage />} />
       </Routes>
     </div>
   )

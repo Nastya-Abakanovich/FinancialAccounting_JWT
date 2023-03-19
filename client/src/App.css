@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Gilroy-Medium', sans-serif;
 }
 
 #root {
@@ -23,6 +24,10 @@ body, html {
   justify-items: start;
   justify-content: center;
 }
+.sign-content {
+  display: grid;
+  margin: auto 30px;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -38,6 +43,18 @@ footer{
   text-align: center;
   margin-top: auto ;
 }
+header{
+  /* flex: 0 0 auto; */
+  background-color: #3b3a3d;
+  color: white;
+  padding: 1rem 4rem;
+  text-align: center;
+  /* margin-top: auto ; */
+}
+.header-link {
+  color: white;
+  padding: 10px;
+}
 table { 
   margin: 20px auto; 
   word-break: break-all;
@@ -49,7 +66,6 @@ table {
   border-radius:15px;
   overflow:hidden;   
   padding: 100px;  
-  font-family: 'Gilroy-Medium', sans-serif;
 }  
 thead tr {    
   background:#7AA899;    
@@ -70,7 +86,6 @@ tbody tr {
   outline: none;
 }
 .submit_thead {
-  font-family: 'Gilroy-Medium', sans-serif;
   font-size:16px;
   background-color: transparent;
   background-repeat: no-repeat;
@@ -79,11 +94,35 @@ tbody tr {
   overflow: hidden;
   outline: none;
 }
-.decor {
- height: 550px;
- margin: 20px auto 0;
- background: white;
- border-radius: 20px;
+form {
+  margin: 20px auto 0;
+  background: white;
+  border-radius: 20px;
+}
+.inputDataForm {
+  height: 550px;
+ }
+.signUpForm {
+  height: 430px;
+ }
+ .signInForm {
+  height: 330px;
+ }
+.signPlaceholder {
+  color: #707981;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+.sign-placeholder-link {
+  color: #707981;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+}
+.error-message {
+  color: red;
+  font-size: 15px;
 }
 .form-inner {
  padding: 40px 50px;
@@ -98,10 +137,8 @@ tbody tr {
  line-height: 40px;
  border-width: 0;
  border-radius: 10px;
- font-family: 'Gilroy-Medium', sans-serif;
 }
 .form-inner label {
-  font-family: 'Gilroy-Medium', sans-serif;
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
@@ -110,7 +147,6 @@ tbody tr {
   display: inline;
 }
 .form-inner input[type="submit"] {
-  
  margin-top: 30px;
  background: #7AA899;
  border-bottom: 4px solid #649786;
@@ -124,7 +160,6 @@ tbody tr {
 }
 .form-inner h3 {
  margin-top: 0;
- font-family: 'Gilroy-Medium', sans-serif;
  font-weight: 500;
  font-size: 24px;
  color: #707981;
