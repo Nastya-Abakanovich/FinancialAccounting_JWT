@@ -1,8 +1,11 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const bodyParser = require('body-parser'); 
 const mysql = require("mysql2");
 const dbConfig = require("./config/db.config.js");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const connection = mysql.createConnection({
     host: dbConfig.host,
@@ -80,6 +83,39 @@ app.post("/api", upload.single('fileToUpload'), urlencodedParser, function (req,
         if (err) throw err;
         res.status(200).json({"spending_id": result.insertId});
     }); 
+});
+
+app.post("/api/users/register", upload.single('fileToUpload'), urlencodedParser, function (req, res) {
+      
+    if(!req.body) return res.sendStatus(400); 
+    
+    var isDuplicateEmail = false;
+    connection.query('SELECT * FROM Users', function (err, result) {
+        if (err) return res.sendStatus(400);
+
+        result.forEach(item => {
+            if (item.email === req.body.email) {
+                isDuplicateEmail = true;
+                return res.status(409).send({ message: 'Email ' + item.email + ' already exist.' });    
+            }
+        });
+
+        if (!isDuplicateEmail) {
+            const salt = bcrypt.genSaltSync(saltRounds);
+            const passHash = bcrypt.hashSync(req.body.password, salt);
+        
+            connection.query('INSERT Users(name, email, password) VALUES (?,?,?)',
+            [
+            req.body.name,
+            req.body.email,
+            passHash
+            ], function (err, result) {
+                if (err) throw err;
+                return res.status(201).json({"user_id": result.insertId});
+            }); 
+        }
+    });
+
 });
 
 app.put("/api", upload.single('fileToUpload'), urlencodedParser, function(req, res){
