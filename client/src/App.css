@@ -28,6 +28,16 @@ body, html {
   display: grid;
   margin: auto 30px;
 }
+.no-auth {
+padding: 250px;
+}
+.no-auth-link {
+  color: white;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -53,6 +63,11 @@ header{
 }
 .header-link {
   color: white;
+  padding: 10px;
+}
+header a {
+  cursor: pointer;
+  text-decoration: underline;
   padding: 10px;
 }
 table { 
@@ -124,6 +139,9 @@ form {
   color: red;
   font-size: 15px;
 }
+.before-sub-div {
+  height: 30px;
+}
 .form-inner {
  padding: 40px 50px;
  width: 350px;
@@ -147,7 +165,7 @@ form {
   display: inline;
 }
 .form-inner input[type="submit"] {
- margin-top: 30px;
+ /* margin-top: 30px; */
  background: #7AA899;
  border-bottom: 4px solid #649786;
  font-size: 16px;

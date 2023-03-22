@@ -34,9 +34,6 @@ class SignUpForm extends React.Component {
 					this.setState({ error: "" });  
 					this.props.signUp(this.state.body);
 
-					// this.setState({
-					// 	body: {name: "", email: "", password: "", repeatPassword: ""},
-					// });  
 				} else {
 					this.setState({error: "Введен некорректный email"});
 				}
@@ -66,8 +63,10 @@ class SignUpForm extends React.Component {
                 <input type="password" name="repeatPassword" maxLength="50" placeholder="Повторите пароль"  required 
                     onChange={this.onChange} value={this.state.body.repeatPassword}/>  
 
-				<p className='error-message'>{this.state.error}</p>
-                <input type="submit" value="Зарегистрироваться" /> 
+				<div className='before-sub-div'>
+					<p className='error-message'>{this.state.error}</p>
+                </div>				
+                <input type="submit" className='signSub' value="Зарегистрироваться" /> 
                 <p className='signPlaceholder'>Уже есть аккаунт?</p>
                 <Link className='sign-placeholder-link' to="/signIn">Авторизоваться.</Link>
           	</div>

@@ -9,8 +9,18 @@ class SignInForm extends React.Component {
   
       this.state = {
         body: {email: "", password: ""}, 
+        error: ""
     };
     }
+
+    componentWillReceiveProps(nextProps) {
+		if (nextProps.serverErr !== null)
+		{
+		  this.setState({ error: nextProps.serverErr});
+		} else {
+            this.setState({ error: ""});
+        }
+	}
   
     handleChange (e) {
       var newBody = this.state.body;
@@ -19,18 +29,34 @@ class SignInForm extends React.Component {
     }
   
     handleSubmit(e) {
-        e.preventDefault();
-      
-        this.props.signUp(this.state.body, this.state.selectedFile);
-
-        this.setState({
-            body: {email: "", password: ""}
-        });  
+        console.log(this.state.body);
+		e.preventDefault();
+		if (this.state.body.password.length >= 6) {			
+            if (this.isValidEmail(this.state.body.email)) {
+                this.setState({ error: "" });  
+                this.props.signIn(this.state.body);
+                  if (this.props.serverErr !== null)
+                    this.setState({error: this.props.serverErr});  
+                // this.setState({
+                //     body: {email: "", password: ""}
+                // });  
+            } else {
+                this.setState({error: "Введен некорректный email"});
+            }
+			
+		} else {
+			this.setState({error: "Длина пароля менее 6 символов"});
+		}
     };  
+
+	isValidEmail(email) {
+		return /\S+@\S+\.\S+/.test(email);
+	}
+  
   
     render() {
       return (
-        <form className="signInForm" name="SingUp" onSubmit={this.onSubmit}>
+        <form className="signInForm" name="SingIn" onSubmit={this.onSubmit}>
           <div className="form-inner">
                 <h3>Авторизация</h3>          
                 <input type="text" name="email" maxLength="50" placeholder="Электронная почта"  required 
@@ -38,7 +64,10 @@ class SignInForm extends React.Component {
                 <input type="password" name="password" maxLength="50" placeholder="Пароль"  required 
                     onChange={this.onChange} value={this.state.body.password}/>                      
 
-                <input type="submit" value="Войти" /> 
+                <div className='before-sub-div'>
+                    <p className='error-message'>{this.state.error}</p>
+                </div>
+                <input type="submit" className='signSub' value="Войти" /> 
                 <p className='signPlaceholder'>Еще нет аккаунта?</p>
                 <Link className='sign-placeholder-link' to="/signUp">Зарегистрироваться.</Link>
           </div>

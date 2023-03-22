@@ -25,20 +25,38 @@ class InputForm extends React.Component {
       return date.toISOString().substring(0, 10);
     }
   
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.updItem !== null)
+    // componentWillReceiveProps(nextProps) {
+    //   alert("will");
+    //   if (nextProps.updItem !== null)
+    //   {
+    //     console.log(nextProps.updItem);
+    //     this.setState({body: {
+    //       sum: nextProps.updItem.sum / 100, 
+    //       category: nextProps.updItem.category, 
+    //       description: nextProps.updItem.description, 
+    //       date: this.setDefaultDate(nextProps.updItem.date), 
+    //       type: nextProps.updItem.income === 1 ? "income" : "expenses", 
+    //       spending_id: nextProps.updItem.spending_id,
+    //       filename: null},
+    //     isAdd: false});
+    //   }
+    // }
+
+    componentDidMount(){      
+      if (this.props.updItem !== null)
       {
+        console.log(this.props.updItem);
         this.setState({body: {
-          sum: nextProps.updItem.sum / 100, 
-          category: nextProps.updItem.category, 
-          description: nextProps.updItem.description, 
-          date: this.setDefaultDate(nextProps.updItem.date), 
-          type: nextProps.updItem.income === 1 ? "income" : "expenses", 
-          spending_id: nextProps.updItem.spending_id,
+          sum: this.props.updItem.sum / 100, 
+          category: this.props.updItem.category, 
+          description: this.props.updItem.description, 
+          date: this.setDefaultDate(this.props.updItem.date), 
+          type: this.props.updItem.income === 1 ? "income" : "expenses", 
+          spending_id: this.props.updItem.spending_id,
           filename: null},
         isAdd: false});
       }
-    }
+   }
   
       handlePickedFile(e) {
           this.setState({selectedFile: e.target.files[0]});
@@ -88,6 +106,7 @@ class InputForm extends React.Component {
                 checked={this.state.body.type === "income"} onChange={this.onChange}/>      
               <label htmlFor="radio-2">Доходы</label>
               <input type="file" name="fileToUpload" key={this.state.inputKey} onChange={this.onPickedFile}/>
+              <div className='before-sub-div'> </div>	
               <input type="submit" value="Добавить" /> 
           </div>
       </form>

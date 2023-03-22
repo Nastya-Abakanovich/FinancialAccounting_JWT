@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Router, Route } from 'react-router-dom';
-import SignUpForm from './components/SignUpForm';
-import SignInForm from './components/SignInForm';
-import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

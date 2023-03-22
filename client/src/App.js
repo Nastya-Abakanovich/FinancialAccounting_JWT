@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/HomePage';
@@ -14,6 +14,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/signUp" element={<SignUpPage />} />
+
+        <Route path='*' element={<Navigate to='/signIn' />} />
       </Routes>
     </div>
   )

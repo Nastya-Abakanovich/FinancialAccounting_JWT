@@ -3,15 +3,28 @@ import InputForm from '../components/InputForm';
 import DataTable from '../components/DataTable';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(null);
     const [updItem, setUpdItem] = useState(null);
+    const navigate = useNavigate(); 
     
     useEffect(() => {
       fetch("/api", {method: "GET"})
-        .then(response => response.json())
-        .then(data => { setItems(data.items) })
+        .then((response) => {
+            
+            if (response.status === 401) {
+              navigate('/signIn'); 
+            }
+            return response.json();
+        })
+        .then(data => { 
+          if (data) {
+            setItems(data.items) 
+            console.log(data.user)
+          }
+        })
     }, [])
   
     const deleteItem = async (id) => {
@@ -45,6 +58,7 @@ function HomePage() {
     const fillForm = async (item) => {
       setUpdItem(item);
       console.log(item);
+      console.log(updItem);
     };
   
     const addItems = async (body, selectedFile) => { 
@@ -108,27 +122,32 @@ function HomePage() {
         console.log(err.message);
       });
     };
+
+    function ShowPage() {
+      if (items !== null) {
+        return (
+        <div className="content">
+          <InputForm 
+            addItems={addItems}
+            updateItems={updateItems}
+            updItem={updItem}
+          />
+          <DataTable 
+            items={items}
+            onClickDelete={deleteItem}
+            onClickUpdate={fillForm}
+            deleteFile={deleteFile}
+          />   
+        </div> )   
+      } else {
+            return <p></p> 
+      }
+    }
   
     return (
         <div className="wrapper">
             <Header/>
-            <div className="content">
-                <InputForm 
-                    addItems={addItems}
-                    updateItems={updateItems}
-                    updItem={updItem}
-                />
-                {(items.length !== 0) ? (
-                <DataTable 
-                    items={items}
-                    onClickDelete={deleteItem}
-                    onClickUpdate={fillForm}
-                    deleteFile={deleteFile}
-                />          
-                ) : (
-                    <p>Loading...</p> 
-                )}  
-            </div>  
+            <ShowPage/>             
             <Footer/>  
         </div>
     )
